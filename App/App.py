@@ -92,7 +92,7 @@ def course_recommender(course_list):
 
 
 # sql connector
-connection = pymysql.connect(host='localhost',user='root',password='root@MySQL4admin',db='cv')
+connection = pymysql.connect(host='localhost',user='root',password='pramodanem#1902',db='cv')
 cursor = connection.cursor()
 
 
@@ -130,13 +130,11 @@ st.set_page_config(
 
 def run():
     
-    # (Logo, Heading, Sidebar etc)
-    img = Image.open('./Logo/RESUM.png')
-    st.image(img)
+    # Sidebar heading
     st.sidebar.markdown("# Choose Something...")
     activities = ["User", "Feedback", "About", "Admin"]
     choice = st.sidebar.selectbox("Choose among the given options:", activities)
-    link = '<b>Built with 🤍 by <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: #021659;">Deepak Padhi</a></b>' 
+    link = '<b>Built by <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: white;">Pramod Kumar</a></b>' 
     st.sidebar.markdown(link, unsafe_allow_html=True)
     st.sidebar.markdown('''
         <!-- site visitors -->
@@ -211,7 +209,8 @@ def run():
     ###### CODE FOR CLIENT SIDE (USER) ######
 
     if choice == 'User':
-        
+        # show application logo for user section
+        st.image('./Logo/recommend.png', width=200)
         # Collecting Miscellaneous Information
         act_name = st.text_input('Name*')
         act_mail = st.text_input('Mail*')
@@ -235,7 +234,7 @@ def run():
 
 
         # Upload Resume
-        st.markdown('''<h5 style='text-align: left; color: #021659;'> Upload Your Resume, And Get Smart Recommendations</h5>''',unsafe_allow_html=True)
+        st.markdown('''<h5 style='text-align: left; color: red;'> Upload Your Resume, And Get Smart Recommendations</h5>''',unsafe_allow_html=True)
         
         ## file upload in pdf format
         pdf_file = st.file_uploader("Choose your Resume", type=["pdf"])
@@ -412,7 +411,7 @@ def run():
 
 
                 ## Resume Scorer & Resume Writing Tips
-                st.subheader("**Resume Tips & Ideas 🥂**")
+                st.markdown("""<h3 style='color: #1ed760;'>Resume Tips & Ideas 🥂</h3>""", unsafe_allow_html=True)
                 resume_score = 0
                 
                 ### Predicting Whether these key points are added to the resume
@@ -576,8 +575,9 @@ def run():
 
 
     ###### CODE FOR FEEDBACK SIDE ######
-    elif choice == 'Feedback':   
-        
+    elif choice == 'Feedback':  
+        # show application logo for feedback section
+        st.image('./Logo/recommend.png', width=200)
         # timestamp 
         ts = time.time()
         cur_date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
@@ -628,7 +628,9 @@ def run():
 
     
     ###### CODE FOR ABOUT PAGE ######
-    elif choice == 'About':   
+    elif choice == 'About':  
+        # show application logo for about section
+        st.image('./Logo/recommend.png', width=200)
 
         st.subheader("**About The Tool - AI RESUME ANALYZER**")
 
@@ -652,8 +654,7 @@ def run():
 
         <p align="justify">
             Built with 🤍 by 
-            <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: grey;">Deepak Padhi</a> through 
-            <a href="https://www.linkedin.com/in/mrbriit/" style="text-decoration: none; color: grey;">Dr Bright --(Data Scientist)</a>
+            <a href="https://dnoobnerd.netlify.app/" style="text-decoration: none; color: grey;">Pramod Kumar</a> 
         </p>
 
         ''',unsafe_allow_html=True)  
@@ -661,6 +662,8 @@ def run():
 
     ###### CODE FOR ADMIN SIDE (ADMIN) ######
     else:
+        # show application logo for admin section
+        st.image('./Logo/recommend.png', width=200)
         st.success('Welcome to Admin Side')
 
         #  Admin Login
@@ -679,7 +682,7 @@ def run():
                 
                 ### Total Users Count with a Welcome Message
                 values = plot_data.Idt.count()
-                st.success("Welcome Deepak ! Total %d " % values + " User's Have Used Our Tool : )")                
+                st.success("Welcome Pramod ! Total %d " % values + " User's Have Used Our Tool : )")                
                 
                 ### Fetch user data from user_data(table) and convert it into dataframe
                 cursor.execute('''SELECT ID, sec_token, ip_add, act_name, act_mail, act_mob, convert(Predicted_Field using utf8), Timestamp, Name, Email_ID, resume_score, Page_no, pdf_name, convert(User_level using utf8), convert(Actual_skills using utf8), convert(Recommended_skills using utf8), convert(Recommended_courses using utf8), city, state, country, latlong, os_name_ver, host_name, dev_user from user_data''')
