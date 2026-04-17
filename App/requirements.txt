@@ -96,3 +96,5 @@ zipp==3.8.1
 # ✅ REQUIRED FOR BUILD
 setuptools>=65.0.0
 wheel
+
+uvicorn[standard]
